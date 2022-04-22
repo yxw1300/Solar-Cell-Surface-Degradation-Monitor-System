@@ -183,23 +183,27 @@ def main():
     plt.show()
     
     import pandas as pd
+    from datetime import datetime
+    now= datetime.now()
     output_data_list = resistance_list
     output_data_list.append(Rc)
     output_data_list.append(Rs)
     output_data_list.append(Lt)
     output_data_list.append(rho)
-    df = pd.read_csv("DataFrameTest.csv")
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    output_data_list.append(dt_string)
+    output_data_list.append(sequential)
+    df = pd.read_csv("PostExpo.csv") #User-defined file designation. Input your file name 
     df.loc[len(df)] = output_data_list
-    df.to_csv("DataFrameTest.csv",index=False)
-        
-       
+    df.to_csv("PostExpo.csv",index=False)
+    
         
         
         
 
 if __name__ == '__main__':
     
-    DevName = input("Type in the file name:") # will be inserted into filename of saved plot
+    sequential = input("Type in the sequential:") # cell number
     Keithley_GPIB_Addr = input ("Input Keithley_GPIB_Address:")
 
     CurrentCompliance = 1.0e-6    # compliance (max) current
